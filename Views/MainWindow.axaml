@@ -1,0 +1,54 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:Pandora.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="Pandora.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="Pandora">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
+
+
+    <DockPanel LastChildFill="True">
+        <Border DockPanel.Dock="Top" Name="SearchBorder" Margin="50">
+            <TextBox Width="200" Watermark="搜索工具" Text="{Binding SearchText}"></TextBox>
+        </Border>
+        <ScrollViewer>
+            <Border Padding="20">
+                <ItemsRepeater ItemsSource="{Binding AppList}" HorizontalAlignment="Center">
+                    <ItemsRepeater.Layout>
+                        <UniformGridLayout />
+                    </ItemsRepeater.Layout>
+                    <ItemsRepeater.ItemTemplate>
+                        <DataTemplate>
+
+                            <StackPanel Orientation="Vertical" Spacing="10" Margin="20">
+                                <Border CornerRadius="10" ClipToBounds="True">
+                                    <Panel Background="IndianRed" Width="120" Height="120">
+                                        <Image Width="" Stretch="Uniform" />
+                                        <Panel>
+                                            <PathIcon Height="75" Width="75" Foreground="Cornsilk"
+                                                      Data="{StaticResource time_picker_regular}" />
+                                        </Panel>
+                                    </Panel>
+
+                                </Border>
+                                <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" />
+                                <!-- <TextBlock Text="{Binding Path}" /> -->
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsRepeater.ItemTemplate>
+                </ItemsRepeater>
+            </Border>
+        </ScrollViewer>
+
+    </DockPanel>
+
+</Window>
